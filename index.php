@@ -1,8 +1,12 @@
 <?php
+start_session();
 
 if(isset($_POST['submit'])) {
 	if(isset($_POST['number']) && isset($_POST['name'])) {
-		
+		$file = json_decode(file_get_contents("decisionrecord.json"));
+		$date = date("d-m-Y i:s");
+		$file[$date] = array('name' => $_POST['name'], 'number' => $_POST['number'], 'done' => 'no');
+		file_put_contents("decisionrecord.json",json_encode($array));
 		$_SESSION['flash'] = "Thanks";
 	}
 	else {
