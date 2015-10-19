@@ -12,14 +12,19 @@ function ConditionalHideRow() {
   var category = sheet.getRange(2,1).getValue();
   var keyword  = sheet.getRange('A4').getValue();
   var sheetToSearch = ss.getSheetByName(category);
-  Logger.log(sheetToSearch);
+  Logger.log("Sheets to search: "+sheetToSearch.getName());
   
   var assocEdNames = new Array();  
-  Logger.log("Max columns "+sheetToSearch.getMaxColumns());
+  Logger.log("Max columns "+sheetToSearch.getMaxColumns()); // not actually required
+  
   for( var i = 1; i <= 18; ++i) { 
+    
+    // search first row to see if keyword is there, if not break the for loop
     if(sheetToSearch.getRange(1,i).getValue() == "") {
+      Logger.log("Broken: "+i);
       break;
     }
+    
     if(sheetToSearch.getRange(1,i).getValue() == keyword) {
       Logger.log("keyword is "+keyword);
       //create list of AEs
